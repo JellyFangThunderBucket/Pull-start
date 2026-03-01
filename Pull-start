@@ -1,0 +1,113 @@
+(function() {
+    const data = {};
+
+    // Page title and URL
+    data.title = document.title;
+    data.url = window.location.href;
+
+    // All text content
+    data.textContent = document.body.innerText;
+
+    // All images
+    data.images = Array.from(document.images).map(img => {
+        return {
+            src: img.src,
+            alt: img.alt,
+            width: img.width,
+            height: img.height,
+            crossOrigin: img.crossOrigin // Added for image CORS info
+        };
+    });
+
+    // All links
+    data.links = Array.from(document.querySelectorAll('a')).map(link => {
+        return {
+            href: link.href,
+            text: link.innerText,
+            title: link.title, // Added for link title attribute
+            target: link.target // To know where the link will open
+        };
+    });
+
+    // All scripts
+    data.scripts = Array.from(document.querySelectorAll('script')).map(script => {
+        return {
+            src: script.src ? script.src : 'Inline script',
+            type: script.type,
+            async: script.async,
+            defer: script.defer
+        };
+    });
+
+    // All forms
+    data.forms = Array.from(document.forms).map(form => {
+        return {
+            action: form.action,
+            method: form.method,
+            fields: Array.from(form.elements).map(field => ({
+                name: field.name,
+                type: field.type,
+                value: field.value,
+                placeholder: field.placeholder // Added for field placeholder
+            }))
+        };
+    });
+
+    // All metadata
+    data.metadata = Array.from(document.querySelectorAll('meta')).map(meta => {
+        return {
+            name: meta.name || '',
+            content: meta.content || '',
+            property: meta.getAttribute('property') || ''
+        };
+    });
+
+    // All header tags
+    data.headers = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6')).map(header => {
+        return {
+            tag: header.tagName,
+            text: header.innerText
+        };
+    });
+
+    // All inline styles
+    data.inlineStyles = Array.from(document.querySelectorAll('*')).map(element => {
+        return {
+            tagName: element.tagName,
+            inlineStyle: element.getAttribute('style'),
+            classList: Array.from(element.classList) // List of all classes
+        };
+    });
+
+    // All CSS stylesheets
+    data.stylesheets = Array.from(document.styleSheets).map(sheet => {
+        try {
+            return {
+                href: sheet.href,
+                rules: Array.from(sheet.cssRules || []).map(rule => rule.cssText)
+            };
+        } catch (e) {
+            return {
+                href: sheet.href,
+                error: 'Access denied' // Some stylesheets may have CORS issues
+            };
+        }
+    });
+
+    // All cookies
+    data.cookies = document.cookie.split('; ').map(cookie => {
+        const parts = cookie.split('=');
+        return {
+            name: parts[0],
+            value: parts[1]
+        };
+    });
+
+    // All console messages (this will log the information as formatted JSON)
+    console.log('Extracted Data:', data);
+
+    // Create a visual output on the page
+    const pre = document.createElement('pre');
+    pre.textContent = JSON.stringify(data, null, 2);
+    document.body.appendChild(pre);
+})();
