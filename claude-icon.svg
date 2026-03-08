@@ -68,23 +68,23 @@
 
     <!-- Outer orbit ring (ellipse, tilted) -->
     <ellipse cx="256" cy="256" rx="185" ry="72"
-      fill="none" stroke="url(#orbitGrad)" stroke-width="1.8" stroke-opacity="0.55"
+      fill="none" stroke="url(#orbitGrad)" stroke-width="5" stroke-opacity="0.9"
       transform="rotate(-28 256 256)"/>
 
     <!-- Inner orbit ring -->
     <ellipse cx="256" cy="256" rx="145" ry="56"
-      fill="none" stroke="#7f5af0" stroke-width="1.2" stroke-opacity="0.35"
+      fill="none" stroke="#7f5af0" stroke-width="3" stroke-opacity="0.7"
       transform="rotate(-28 256 256)"/>
 
     <!-- Orbit dots (nodes around the outer ring) -->
     <!-- Top-right node -->
-    <circle cx="388" cy="206" r="7" fill="#7f5af0" filter="url(#dotGlow)"/>
+    <circle cx="388" cy="206" r="14" fill="#7f5af0" filter="url(#dotGlow)"/>
     <!-- Bottom-left node -->
-    <circle cx="124" cy="306" r="5" fill="#2cb67d" filter="url(#dotGlow)"/>
+    <circle cx="124" cy="306" r="12" fill="#2cb67d" filter="url(#dotGlow)"/>
     <!-- Top-left node -->
-    <circle cx="156" cy="188" r="4" fill="#7f5af0" filter="url(#dotGlow)" opacity="0.7"/>
+    <circle cx="156" cy="188" r="9" fill="#7f5af0" filter="url(#dotGlow)" opacity="0.9"/>
     <!-- Bottom-right node -->
-    <circle cx="356" cy="324" r="4" fill="#2cb67d" filter="url(#dotGlow)" opacity="0.6"/>
+    <circle cx="356" cy="324" r="9" fill="#2cb67d" filter="url(#dotGlow)" opacity="0.85"/>
 
     <!-- The "C" — bold, centered, glowing amber -->
     <!-- Using a path for a clean open C shape -->
@@ -99,21 +99,20 @@
       filter="url(#glowFilter)"
     />
 
-    <!-- Code brackets in the bottom corners (subtle) -->
-    <!-- Left bracket -->
-    <text x="62" y="440" font-family="'Courier New', monospace" font-size="52" fill="#7f5af0" opacity="0.45" font-weight="bold">&lt;/&gt;</text>
+    <!-- Code brackets — centered at bottom, bold and visible -->
+    <text x="256" y="468" text-anchor="middle" font-family="'Courier New', monospace" font-size="72" fill="#7f5af0" opacity="0.85" font-weight="bold">&lt;/&gt;</text>
 
-    <!-- Subtle horizontal scan line at bottom -->
-    <rect x="0" y="468" width="512" height="1.5" fill="#7f5af0" opacity="0.18"/>
+    <!-- Horizontal scan line at bottom -->
+    <rect x="0" y="480" width="512" height="2.5" fill="#7f5af0" opacity="0.4"/>
 
-    <!-- Tiny star-like sparkles in bg -->
-    <circle cx="80"  cy="90"  r="1.5" fill="white" opacity="0.5"/>
-    <circle cx="430" cy="70"  r="1"   fill="white" opacity="0.4"/>
-    <circle cx="460" cy="180" r="1.5" fill="white" opacity="0.3"/>
-    <circle cx="50"  cy="380" r="1"   fill="white" opacity="0.4"/>
-    <circle cx="400" cy="440" r="1.5" fill="white" opacity="0.3"/>
-    <circle cx="180" cy="60"  r="1"   fill="white" opacity="0.35"/>
-    <circle cx="340" cy="470" r="1"   fill="white" opacity="0.3"/>
+    <!-- Star-like sparkles — bigger and brighter -->
+    <circle cx="80"  cy="90"  r="3"   fill="white" opacity="0.8"/>
+    <circle cx="430" cy="70"  r="2.5" fill="white" opacity="0.7"/>
+    <circle cx="460" cy="180" r="3"   fill="white" opacity="0.6"/>
+    <circle cx="50"  cy="380" r="2.5" fill="white" opacity="0.7"/>
+    <circle cx="400" cy="440" r="3"   fill="white" opacity="0.6"/>
+    <circle cx="180" cy="60"  r="2"   fill="white" opacity="0.65"/>
+    <circle cx="340" cy="470" r="2.5" fill="white" opacity="0.6"/>
 
   </g>
 
