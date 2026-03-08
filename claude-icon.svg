@@ -1,9 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
-    <!-- Rounded square clip -->
+    <!-- Apple-style superellipse (squircle) clip -->
+    <!-- Bezier approximation of superellipse: handles at ~9% from edges for smooth continuous curvature -->
     <clipPath id="roundedSquare">
-      <rect width="512" height="512" rx="112" ry="112"/>
+      <path d="M 0 256 C 0 38.4, 38.4 0, 256 0 C 473.6 0, 512 38.4, 512 256 C 512 473.6, 473.6 512, 256 512 C 38.4 512, 0 473.6, 0 256 Z"/>
     </clipPath>
+
+    <!-- Top gloss highlight for 3D depth -->
+    <linearGradient id="glossGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   style="stop-color:#ffffff;stop-opacity:0.18"/>
+      <stop offset="55%"  style="stop-color:#ffffff;stop-opacity:0.04"/>
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0"/>
+    </linearGradient>
+
+    <!-- Edge vignette for depth -->
+    <radialGradient id="vignetteGrad" cx="50%" cy="50%" r="70%">
+      <stop offset="60%" style="stop-color:#000000;stop-opacity:0"/>
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:0.45"/>
+    </radialGradient>
 
     <!-- Background gradient: deep space indigo to near-black -->
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -105,6 +119,12 @@
     <!-- Horizontal scan line at bottom -->
     <rect x="0" y="480" width="512" height="2.5" fill="#7f5af0" opacity="0.4"/>
 
+    <!-- Edge vignette for depth -->
+    <rect width="512" height="512" fill="url(#vignetteGrad)"/>
+
+    <!-- Top gloss sheen (upper ~45% of icon) -->
+    <rect width="512" height="230" fill="url(#glossGrad)"/>
+
     <!-- Star-like sparkles — bigger and brighter -->
     <circle cx="80"  cy="90"  r="3"   fill="white" opacity="0.8"/>
     <circle cx="430" cy="70"  r="2.5" fill="white" opacity="0.7"/>
@@ -116,7 +136,7 @@
 
   </g>
 
-  <!-- Rounded border highlight -->
-  <rect width="512" height="512" rx="112" ry="112"
-    fill="none" stroke="white" stroke-width="1.5" stroke-opacity="0.08"/>
+  <!-- Squircle border highlight -->
+  <path d="M 0 256 C 0 38.4, 38.4 0, 256 0 C 473.6 0, 512 38.4, 512 256 C 512 473.6, 473.6 512, 256 512 C 38.4 512, 0 473.6, 0 256 Z"
+    fill="none" stroke="white" stroke-width="1.5" stroke-opacity="0.10"/>
 </svg>
