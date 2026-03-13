@@ -120,43 +120,40 @@ This makes the shortcut look like a real utility when someone watches you open i
 
 ### Step 3 — Add Biometric Authentication (Layer 2)
 
-This is the first real security gate using Face ID or Touch ID. There are two ways
-to do this — use **Option A** on iOS 18+, or **Option B** for older versions.
+This is the first real security gate using Face ID or Touch ID. It forces the phone
+to lock, so anyone who triggered the shortcut must authenticate to continue.
 
-#### Option A — Lock the Entire Shortcut (iOS 18+, simplest)
+> **Your dropdown menu** (when you tap the shortcut name at the top) should show:
+> **Rename**, **Choose Icon**, **Duplicate**, **Move**, and **Add to Home Screen**.
+> That's normal — the biometric lock is added as an action inside the shortcut, not
+> from that menu.
 
-This uses a built-in Shortcuts setting — no extra actions needed.
+1. Tap the **Search Actions** bar at the very bottom of the screen.
+2. Type `Lock Screen` and tap the result that appears.
+   - It shows up with an hourglass-style icon under the **Scripting** category.
+   - This action immediately locks the device when the shortcut reaches it.
+3. **Drag the Lock Screen action** so it sits right below your last **Wait** action
+   from Step 2. Your action list should now look like this:
+   ```
+   Show Notification  →  "Scanning system diagnostics..."
+   Wait               →  2 seconds
+   Show Notification  →  "Analyzing thermal data..."
+   Wait               →  3 seconds
+   Lock Screen        ← new
+   ```
+4. Tap **Search Actions** again and type `Wait`. Add another **Wait** action
+   directly below **Lock Screen**.
+   - Set the duration to **1 second**.
+   - This gives iOS time to process the unlock before the next action fires.
 
-1. In the shortcut editor, tap the **shortcut name** at the very top of the screen.
-2. In the dropdown menu, tap **Shortcut Details**.
-3. Under the **Privacy** heading, toggle on **"Require Authentication"**.
-4. Tap **Done**.
+**How it works:** When the shortcut hits **Lock Screen**, the phone locks instantly.
+The user must use Face ID, Touch ID, or their passcode to unlock. Only after a
+successful unlock does the shortcut continue to the PIN prompt in Step 4. If someone
+fails to unlock or walks away, the shortcut never reaches the vault.
 
-That's it. Every time the shortcut runs, iOS will prompt for Face ID, Touch ID, or
-your device passcode before any actions execute. If auth fails, the shortcut stops
-immediately.
-
-#### Option B — Use the "Lock Screen" Action (iOS 16–17)
-
-If you don't see the toggle above, you can force an authentication prompt using
-Shortcuts actions instead.
-
-1. Search the action list for **"Lock Screen"** and add it.
-   - In the search bar at the bottom, type `Lock Screen` — it appears under the
-     **Scripting** category.
-   - This action immediately locks the device and requires Face ID / Touch ID /
-     passcode to get back in.
-2. Right after **Lock Screen**, add a **Wait** action:
-   - Tap the search bar, type `Wait`, and add it.
-   - Set the duration to **1** second (this gives iOS time to process the unlock).
-3. The shortcut continues only after the user successfully unlocks. If they fail
-   or cancel, the shortcut stays locked at the Lock Screen and never reaches the
-   PIN prompt or vault.
-
-> **Which option should I use?** Option A is cleaner because the auth prompt appears
-> inside the shortcut itself (like an in-app Face ID prompt). Option B physically
-> locks the phone, which works but is slightly more jarring. Use Option A if your
-> iOS version supports it.
+> **Note:** You'll also see a **Set authPassed to No** action you added — you can
+> delete that. We won't need a separate variable since the Lock Screen action handles
+> the gating on its own. Long-press it and tap **Delete** to remove it.
 
 ---
 
